@@ -113,9 +113,30 @@ JulyHttp::~JulyHttp()
 void JulyHttp::setupSocket()
 {
 	static QList<QSslCertificate> certs;
+
     if(certs.count()==0)
 	{
-		QFile readCerts(":/Resources/CertBase.cer");
+        QFile readCerts(":/Resources/CertBase.cer");
+        if(readCerts.open(QIODevice::ReadOnly))
+        {
+            QByteArray certData=readCerts.readAll()+"{SPLIT}";
+            readCerts.close();
+            do
+            {
+            int nextCert=certData.indexOf("{SPLIT}");
+            if(nextCert>-1)
+            {
+                QByteArray currentCert=certData.left(nextCert);
+                QSslCertificate derCert(currentCert,QSsl::Der);
+                if(!derCert.isNull())certs<<derCert;
+                certData.remove(0,nextCert+7);
+            }
+            else certData.clear();
+            }while(certData.size());
+        }
+
+        readCerts.close();
+        readCerts.setFileName(":/Resources/GeoTrustPrimaryCertificationAuthority.der");
 		if(readCerts.open(QIODevice::ReadOnly))
 		{
 			QByteArray certData=readCerts.readAll()+"{SPLIT}";

@@ -118,5 +118,9 @@
         <file>Resources/CurrencySign/ZEC.png</file>
         <file>Resources/CurrencySign/XMR.png</file>
         <file>Resources/CurrencySign/RRT.png</file>
+        <file>Resources/Exchanges/Logos/CEXIO.png</file>
+        <file>Resources/Exchanges/Logos/CEXIO_Big.png</file>
+        <file>Resources/Exchanges/CEXIO.ini</file>
+        <file>Resources/GeoTrustPrimaryCertificationAuthority.der</file>
     </qresource>
 </RCC>

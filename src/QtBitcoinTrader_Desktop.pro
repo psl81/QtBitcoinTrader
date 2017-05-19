@@ -5,9 +5,9 @@ error("Qt less than 5.5 is no longer supported. In order to compile Qt Bitcoin T
 TEMPLATE	= app
 LANGUAGE	= C++
 DEPENDPATH	+= .
-INCLUDEPATH	+= .
+INCLUDEPATH += C:\Dev\openssl\OpenSSL-Win32\include
 
-CONFIG	+= qt release c++11
+CONFIG	+= qt debug c++11
 
  win32 { TARGET = ../Bin/QtBitcoinTrader }
 !win32 { TARGET = QtBitcoinTrader }
@@ -16,7 +16,8 @@ QT += network script widgets
 !win32 { QT += multimedia }
 
 win32 {
-    LIBS += -llibcrypto -llibssl -lz
+#    LIBS += -llibcrypto -llibssl -lz
+    LIBS += -L"C:\Dev\openssl\OpenSSL-Win32\lib\MinGW" -llibeay32 -lssleay32 -lwinmm -lole32 -lws2_32 -lz
 
     exists($$(WINDOWSSDKDIR)/Include/um/sapi.h){
         QMAKE_CXXFLAGS_RELEASE -= -Zc:strictStrings
@@ -107,6 +108,7 @@ HEADERS += script/addrulegroup.h \
            exchange/exchange_bitstamp.h \
            exchange/exchange_btcchina.h \
            exchange/exchange_btce.h \
+           exchange/exchange_cexio.h \
            feecalculator.h \
            historyitem.h \
            historymodel.h \
@@ -219,6 +221,7 @@ SOURCES += script/addrulegroup.cpp \
            exchange/exchange_bitstamp.cpp \
            exchange/exchange_btcchina.cpp \
            exchange/exchange_btce.cpp \
+           exchange/exchange_cexio.cpp \
            feecalculator.cpp \
            historyitem.cpp \
            historymodel.cpp \

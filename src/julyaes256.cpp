@@ -42,7 +42,7 @@ QByteArray JulyAES256::sha256(const QByteArray &text)
     EVP_DigestUpdate(evpMdCtx, text.data(), text.size());
     EVP_DigestFinal_ex(evpMdCtx, (unsigned char *)dataBuff.data(), &outLen);
     EVP_MD_CTX_cleanup(evpMdCtx);
-    delete evpMdCtx;
+//    delete evpMdCtx;
     dataBuff.resize(outLen);
 	return dataBuff.toHex();
 }
@@ -59,7 +59,7 @@ QByteArray JulyAES256::encrypt(const QByteArray &data, const QByteArray &passwor
     EVP_EncryptFinal(evpCipherCtx,(unsigned char*)dataBuff.data()+tempLen,&outLen);
 	tempLen+=outLen;
     EVP_CIPHER_CTX_cleanup(evpCipherCtx);
-    delete evpCipherCtx;
+//    delete evpCipherCtx;
 	dataBuff.resize(tempLen);
 	return dataBuff;
 }
@@ -76,7 +76,7 @@ QByteArray JulyAES256::decrypt(const QByteArray &data, const QByteArray &passwor
     EVP_DecryptFinal(evpCipherCtx,(unsigned char*)dataBuff.data()+tempLen,&outLen);
 	tempLen+=outLen;
     EVP_CIPHER_CTX_cleanup(evpCipherCtx);
-    delete evpCipherCtx;
+//    delete evpCipherCtx;
     dataBuff.resize(tempLen);
 	return dataBuff;
 }

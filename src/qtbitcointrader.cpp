@@ -62,6 +62,7 @@
 #include "exchange/exchange_bitcurex.h"
 #include "exchange/exchange_bitmarket.h"
 #include "exchange/exchange_okcoin.h"
+#include "exchange/exchange_cexio.h"
 #include <QSystemTrayIcon>
 #include <QtCore/qmath.h>
 #include "script/addrulegroup.h"
@@ -581,6 +582,7 @@ void QtBitcoinTrader::setupClass()
 	case 7: currentExchange=new Exchange_BitCurex(baseValues.restSign,baseValues.restKey);break;//BitCurex
 	case 8: currentExchange=new Exchange_BitMarket(baseValues.restSign,baseValues.restKey);break;//BitMarket
     case 9: currentExchange=new Exchange_OKCoin(baseValues.restSign,baseValues.restKey);break;//OKCoin
+    case 10: currentExchange=new Exchange_CEXIO(baseValues.restSign,baseValues.restKey);break;//CEX.IO
 	default: return;
 	}
 	baseValues.restSign.clear();
